@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI Smart Car Control</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Smart Car Control</h1>
+            <div class="status-indicator">
+                <span id="connection-status" class="status-dot disconnected"></span>
+                <span id="status-text">Disconnected</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="video-container">
+                <video id="remote-video" autoplay playsinline muted></video>
+                <div class="hud-overlay">
+                    <div class="hud-item speed">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span id="speed-value">0</span>
+                    </div>
+                    <div class="hud-item direction">
+                        <i class="fas fa-compass"></i>
+                        <span id="direction-value">STOP</span>
+                    </div>
+                    <div class="hud-item camera-angle">
+                        <i class="fas fa-video"></i>
+                        <span id="camera-angle-value">H: 80° V: 40°</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="joystick-container">
+                    <div class="joystick-label">Movement</div>
+                    <div id="movement-joystick" class="joystick"></div>
+                </div>
+                
+                <div class="joystick-container">
+                    <div class="joystick-label">Camera</div>
+                    <div id="camera-joystick" class="joystick"></div>
+                </div>
+            </div>
+
+            <div class="interaction-container">
+                <div class="voice-container">
+                    <button id="voice-button" class="voice-button">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div id="voice-status">Press and hold to speak</div>
+                </div>
+
+                <div class="chat-container">
+                    <div id="chat-messages" class="chat-messages"></div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chat-input" placeholder="Type a command...">
+                        <button id="chat-send">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="settings-container">
+                <button id="settings-button" class="settings-button">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+            <div class="copyright">
+                &copy; 2025 AI Smart Car Project
+            </div>
+        </footer>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Settings</h2>
+            
+            <div class="settings-section">
+                <h3>Voice</h3>
+                <div class="setting-item">
+                    <label for="voice-volume">Volume:</label>
+                    <input type="range" id="voice-volume" min="0" max="1" step="0.1" value="1">
+                    <span id="voice-volume-value">100%</span>
+                </div>
+                <div class="setting-item">
+                    <label for="voice-rate">Speed:</label>
+                    <input type="range" id="voice-rate" min="50" max="300" step="10" value="150">
+                    <span id="voice-rate-value">150 wpm</span>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Video</h3>
+                <div class="setting-item">
+                    <label for="video-quality">Quality:</label>
+                    <select id="video-quality">
+                        <option value="low">Low (480p)</option>
+                        <option value="medium" selected>Medium (720p)</option>
+                        <option value="high">High (1080p)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Permissions</h3>
+                <button id="request-permissions" class="permission-button">
+                    Request Microphone Access
+                </button>
+                <div id="permissions-status"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nipplejs@0.10.0/dist/nipplejs.min.js"></script>
+    <script src="{{ url_for('static', filename='js/webrtc.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/controls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/voice.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> 

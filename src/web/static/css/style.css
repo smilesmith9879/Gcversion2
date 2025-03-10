@@ -1,0 +1,469 @@
+/* AI Smart Car Control - Main Stylesheet */
+
+/* ===== Variables ===== */
+:root {
+    /* Color Scheme */
+    --primary-color: #1a2a3a;       /* Mysterious blue */
+    --secondary-color: #b08d57;     /* Bronze */
+    --accent-color: #d4af37;        /* Gold */
+    --text-color: #e0e0e0;          /* Light gray */
+    --background-color: #0a1520;    /* Dark blue */
+    --overlay-color: rgba(10, 21, 32, 0.8);
+    
+    /* Fonts */
+    --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    /* Sizes */
+    --header-height: 60px;
+    --footer-height: 50px;
+}
+
+/* ===== Global Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--main-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    background-image: url('../img/temple-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ===== Header ===== */
+header {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+h1 {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.disconnected {
+    background-color: #ff4d4d;
+    box-shadow: 0 0 8px #ff4d4d;
+}
+
+.connected {
+    background-color: #4dff4d;
+    box-shadow: 0 0 8px #4dff4d;
+}
+
+/* ===== Main Content ===== */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+    overflow-y: auto;
+}
+
+/* Video Container */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background-color: #000;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#remote-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* HUD Overlay */
+.hud-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    pointer-events: none;
+}
+
+.hud-item {
+    background-color: var(--overlay-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    margin: 5px;
+    border: 1px solid var(--secondary-color);
+}
+
+.hud-item i {
+    margin-right: 8px;
+    color: var(--accent-color);
+}
+
+/* Controls Container */
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    height: 150px;
+}
+
+.joystick-container {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.joystick-label {
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.joystick {
+    width: 120px;
+    height: 120px;
+    background-color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    position: relative;
+}
+
+/* Interaction Container */
+.interaction-container {
+    display: flex;
+    margin-top: 20px;
+}
+
+.voice-container {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.voice-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    color: var(--accent-color);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.voice-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.voice-button:active {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+#voice-status {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: var(--overlay-color);
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+.chat-input-container {
+    display: flex;
+    border-top: 1px solid var(--secondary-color);
+    padding: 10px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    margin-right: 10px;
+}
+
+#chat-send {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    color: var(--accent-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Message Styles */
+.message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.user-message {
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.ai-message {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    align-self: flex-start;
+}
+
+/* ===== Footer ===== */
+footer {
+    height: var(--footer-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    border-top: 1px solid var(--secondary-color);
+}
+
+.settings-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    color: var(--accent-color);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+}
+
+/* ===== Modal ===== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--primary-color);
+    margin: 10% auto;
+    padding: 20px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.settings-section {
+    margin-bottom: 20px;
+}
+
+.settings-section h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 5px;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.setting-item label {
+    width: 80px;
+}
+
+.setting-item input[type="range"] {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.permission-button {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#permissions-status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+/* ===== Ancient Rune Styling ===== */
+.voice-button, #chat-send, .settings-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.voice-button::before, #chat-send::before, .settings-button::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: url('../img/rune-circle.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.3;
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.voice-button:hover::before, #chat-send:hover::before, .settings-button:hover::before {
+    opacity: 0.6;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    .controls-container {
+        height: 120px;
+    }
+    
+    .joystick {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .interaction-container {
+        flex-direction: column;
+    }
+    
+    .voice-container {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    #voice-status {
+        margin-top: 0;
+        margin-left: 15px;
+    }
+    
+    .chat-messages {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.2rem;
+    }
+    
+    .controls-container {
+        height: 100px;
+    }
+    
+    .joystick {
+        width: 80px;
+        height: 80px;
+    }
+} 
